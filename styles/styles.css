@@ -1,212 +1,215 @@
 /* Importa a fonte "Copperplate" do arquivo local */
 @font-face {
-  font-family: "Copperplate";
-  src: url("../fonts/Copperplate.otf");
+  font-family: "Copperplate"; /* Nome da fonte */
+  src: url("../fonts/Copperplate.otf"); /* Caminho para o arquivo da fonte */
 }
 
 /* Importa a fonte "JoseFins" do arquivo local */
 @font-face {
-  font-family: "JoseFins";
-  src: url("../fonts/JosefinSans.ttf");
+  font-family: "JoseFins"; /* Nome da fonte */
+  src: url("../fonts/JosefinSans.ttf"); /* Caminho para o arquivo da fonte */
 }
 
 /* Reset de estilos para remover margens e paddings padrão */
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+  box-sizing: border-box; /* Garante que a largura e altura dos elementos incluem padding e borda */
+  padding: 0; /* Remove o padding padrão de todos os elementos */
+  margin: 0; /* Remove a margem padrão de todos os elementos */
 }
 
 /* Define o estilo do corpo da página */
 body {
-  height: 100vh;
+  height: 100vh; /* A altura da página ocupa toda a altura da tela */
   background-color: #000000; /* Fundo preto */
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex; /* Usa o Flexbox para centralizar os itens */
+  justify-content: center; /* Alinha horizontalmente ao centro */
+  align-items: center; /* Alinha verticalmente ao centro */
 }
 
 /* Container para efeito de chuva */
 .container_rain {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 400px;
-  height: 100vh;
-  background-color: transparent;
+  position: absolute; /* Posiciona o container de forma absoluta */
+  top: 0; /* Define o topo como 0 */
+  left: 0; /* Define a posição esquerda como 0 */
+  width: 400px; /* Largura do container */
+  height: 100vh; /* Altura do container igual a altura da tela */
+  background-color: transparent; /* Fundo transparente */
 }
 
 /* Estiliza as nuvens */
 .cloud {
-  position: absolute;
-  width: 250px;
-  height: 100px;
-  background: url("../images/nuvem.png") center / cover no-repeat;
-  filter: drop-shadow(2px 2px 20px #e3eed4);
+  position: absolute; /* Posicionamento absoluto para as nuvens */
+  width: 250px; /* Largura das nuvens */
+  height: 100px; /* Altura das nuvens */
+  background: url("../images/nuvem.png") center / cover no-repeat; /* Imagem de fundo das nuvens */
+  filter: drop-shadow(
+    2px 2px 20px #e3eed4
+  ); /* Adiciona uma sombra nas nuvens */
 }
 
 /* Define posições específicas para as nuvens */
 .cloud:nth-child(1) {
-  top: 2.5%;
-  left: 5%;
+  top: 2.5%; /* Define a posição da primeira nuvem */
+  left: 5%; /* Define a posição da primeira nuvem */
 }
 
 .cloud:nth-child(2) {
-  z-index: 3000;
-  top: 2.5%;
-  left: 24%;
+  z-index: 3000; /* Define a sobreposição para que fique na frente das outras nuvens */
+  top: 2.5%; /* Define a posição da segunda nuvem */
+  left: 24%; /* Define a posição da segunda nuvem */
 }
 
 .cloud:nth-child(3) {
-  z-index: 3000;
-  top: 9.5%;
-  left: 5%;
+  z-index: 3000; /* Define a sobreposição para que fique na frente das outras nuvens */
+  top: 9.5%; /* Define a posição da terceira nuvem */
+  left: 5%; /* Define a posição da terceira nuvem */
 }
 
 /* Estiliza as gotas de chuva */
 .rain {
-  background-color: #e3eed4;
-  width: 5px;
-  height: 5px;
-  border-radius: 0 50% 50% 50%;
-  transform: rotate(45deg);
-  box-shadow: inset -25px 10px 0px -10px #8d8b8b;
-  z-index: 1000;
-  position: absolute;
-  top: 90px;
+  background-color: #e3eed4; /* Cor das gotas */
+  width: 5px; /* Largura das gotas */
+  height: 5px; /* Altura das gotas */
+  border-radius: 0 50% 50% 50%; /* Faz com que as gotas fiquem arredondadas */
+  transform: rotate(45deg); /* Rotaciona as gotas */
+  box-shadow: inset -25px 10px 0px -10px #8d8b8b; /* Adiciona uma sombra interna nas gotas */
+  z-index: 1000; /* Garante que as gotas fiquem acima de outros elementos */
+  position: absolute; /* Posicionamento absoluto das gotas */
+  top: 90px; /* Posiciona as gotas a 90px do topo */
 
-  transform-origin: bottom;
-  animation: animate 2s linear infinite;
+  transform-origin: bottom; /* Define a origem da transformação na parte inferior */
+  animation: animate 2s linear infinite; /* Animação das gotas de chuva */
 }
 
 /* Animação da chuva */
 @keyframes animate {
   0% {
-    transform: translateY(0) scaleY(1);
-    opacity: 1;
+    transform: translateY(0) scaleY(1); /* Inicia a animação na posição inicial */
+    opacity: 1; /* Torna a gota completamente visível */
   }
   60% {
-    transform: translateY(80vh) scaleY(1);
-    opacity: 1;
+    transform: translateY(80vh) scaleY(1); /* Desloca a gota até 80% da altura da tela */
+    opacity: 1; /* A gota continua visível */
   }
   80% {
-    transform: translateY(80vh) scaleY(0.2);
-    opacity: 0.5;
+    transform: translateY(80vh) scaleY(0.2); /* Diminui a gota */
+    opacity: 0.5; /* Diminui a opacidade da gota */
   }
   100% {
-    transform: translateY(80vh) scaleY(0.2);
-    opacity: 0;
+    transform: translateY(80vh) scaleY(0.2); /* A gota atinge a parte inferior */
+    opacity: 0; /* Torna a gota invisível */
   }
 }
 
 /* Container principal do formulário */
 .container {
-  width: 80%;
-  height: 80%;
+  width: 80%; /* Largura do container principal */
+  height: 80%; /* Altura do container principal */
   background-color: #e3eed4; /* Fundo claro */
-  border-radius: 30px;
-  box-shadow: 2px -10px 35px #ffffff;
+  border-radius: 30px; /* Bordas arredondadas */
+  box-shadow: 2px -10px 35px #ffffff; /* Sombra para o container */
 
-  display: grid;
-  grid-template-columns: 40% 60%;
-  grid-template-rows: 1fr;
-  justify-items: center;
-  align-items: center;
+  display: grid; /* Usa grid para organizar os elementos */
+  grid-template-columns: 40% 60%; /* Define duas colunas no grid */
+  grid-template-rows: 1fr; /* Uma única linha no grid */
+  justify-items: center; /* Alinha os itens no centro horizontalmente */
+  align-items: center; /* Alinha os itens no centro verticalmente */
 
-  overflow: hidden;
+  overflow: hidden; /* Garante que os elementos não saiam da área visível */
 }
 
 /* Estiliza a imagem de fundo */
 .image_container {
-  width: 100%;
-  height: 100%;
+  width: 100%; /* A largura ocupa todo o container */
+  height: 100%; /* A altura ocupa todo o container */
   background: url("../images/semifinal-do-paulistao.jpg") center / cover
-    no-repeat;
-  border-radius: 0 30px 30px 0;
+    no-repeat; /* Imagem de fundo */
+  border-radius: 0 30px 30px 0; /* Bordas arredondadas no lado direito */
 
-  padding-left: 10%;
-  position: relative;
-  overflow: hidden;
+  padding-left: 10%; /* Espaçamento à esquerda */
+  position: relative; /* Permite posicionar elementos dentro */
+  overflow: hidden; /* Garante que nada saia do container */
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: flex; /* Flexbox para centralizar o conteúdo */
+  flex-direction: column; /* Organiza o conteúdo na vertical */
+  justify-content: center; /* Alinha o conteúdo ao centro */
 }
 
 /* Adiciona um efeito escuro sobre a imagem */
 .image_container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 1;
+  content: ""; /* Cria um elemento pseudo */
+  position: absolute; /* Posiciona-o de forma absoluta */
+  top: 0; /* Define o topo como 0 */
+  left: 0; /* Define a esquerda como 0 */
+  width: 100%; /* Largura total */
+  height: 100%; /* Altura total */
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro com opacidade */
+  z-index: 1; /* Garante que o efeito fique acima da imagem */
 }
 
 /* Define estilos para o texto dentro da imagem */
 .image_container h1,
 .image_container p {
-  position: relative;
-  z-index: 2;
-  color: #e3eed4;
+  position: relative; /* Garante que o texto fique sobre o efeito escuro */
+  z-index: 2; /* Garante que o texto fique acima do efeito escuro */
+  color: #e3eed4; /* Cor do texto */
 }
 
 /* Estiliza os títulos do formulário */
 #cadastroForm h1 {
-  font-family: "JoseFins";
-  font-size: 2em;
-  color: #0f2a1d;
+  font-family: "JoseFins"; /* Fonte do título */
+  font-size: 2em; /* Tamanho da fonte */
+  color: #0f2a1d; /* Cor do título */
 }
 
 #cadastroForm p {
-  font-family: "Copperplate";
-  font-size: 11px;
-  font-style: italic;
-  color: #0f2a1d;
+  font-family: "Copperplate"; /* Fonte do parágrafo */
+  font-size: 11px; /* Tamanho da fonte */
+  font-style: italic; /* Deixa o texto em itálico */
+  color: #0f2a1d; /* Cor do parágrafo */
 }
 
 /* Define o estilo dos inputs */
 #cadastroForm .input_data input {
-  font-family: "Copperplate";
-  font-size: 11px;
-  border: none;
-  border-bottom: 1px solid #0f2a1d;
-  color: #0f2a1d;
+  font-family: "Copperplate"; /* Fonte do input */
+  font-size: 11px; /* Tamanho da fonte */
+  border: none; /* Remove a borda do input */
+  border-bottom: 1px solid #0f2a1d; /* Adiciona uma borda inferior */
+  color: #0f2a1d; /* Cor do texto */
 }
 
 /* Animação dos labels ao preencher os inputs */
 #cadastroForm .input_data input:focus + label,
 #cadastroForm .input_data input:valid + label {
-  top: -10%;
-  left: 0;
+  top: -10%; /* Move o label para cima quando o input é focado ou preenchido */
+  left: 0; /* Alinha o label à esquerda */
 }
 
 /* Botão de envio */
 #cadastroForm .btnArea button {
-  font-family: "Copperplate";
-  border: 1px solid #0f2a1d;
-  background-color: #0f2a1d;
-  color: #e3eed4;
-  cursor: pointer;
-  font-size: 18px;
+  font-family: "Copperplate"; /* Fonte do botão */
+  border: 1px solid #0f2a1d; /* Borda do botão */
+  background-color: #0f2a1d; /* Cor de fundo do botão */
+  color: #e3eed4; /* Cor do texto do botão */
+  cursor: pointer; /* Muda o cursor para indicar que é clicável */
+  font-size: 18px; /* Tamanho da fonte */
 }
 
+/* Estilos para o botão ao passar o mouse sobre ele */
 #cadastroForm .btnArea button:hover {
-  background-color: transparent;
-  border: 1px solid #0f2a1d;
-  color: #0f2a1d;
-  transition: 0.7s;
+  background-color: transparent; /* Fundo transparente */
+  border: 1px solid #0f2a1d; /* Borda permanece */
+  color: #0f2a1d; /* Cor do texto do botão */
+  transition: 0.7s; /* Transição suave para a mudança de estilo */
 }
 
 /* Responsividade para telas menores */
 @media (max-width: 830px) {
   .container {
-    grid-template-columns: 1fr;
-    grid-template-rows: 30% 70%;
-    height: 90%;
+    grid-template-columns: 1fr; /* Uma coluna ao invés de duas */
+    grid-template-rows: 30% 70%; /* Ajusta a altura das linhas */
+    height: 90%; /* Ajusta a altura do container */
   }
 
   .container_rain {
