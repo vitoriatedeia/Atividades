@@ -1,4 +1,7 @@
+// Exibe no console que o JavaScript está conectado
 console.log("JS CONECTADO!");
+
+// Captura elementos do formulário pelo ID
 const formulario = document.getElementById("cadastroForm");
 const nome = document.getElementById("nome");
 const email = document.getElementById("email");
@@ -9,55 +12,36 @@ const cpf = document.getElementById("cpf");
 const rg = document.getElementById("rg");
 const msgError = document.getElementsByClassName("msgError");
 
-/* ------ FUNÇÃO PARA RENDERIZAR AS DIFERENTES MENSAGENS DE ERRO! ------ */
+// Função para exibir mensagens de erro no formulário
 const createDisplayMsgError = (mensagem) => {
   msgError[0].textContent = mensagem;
 };
-/* --------------------------------------------------------------------- */
 
-/* ---------------- FUNÇÃO PARA VERIFICAR O NOME ----------------------- */
+// Função para validar o nome (apenas letras e espaços permitidos)
 const checkNome = () => {
   const nomeRegex = /^[A-Za-zÀ-ÿ\s]+$/;
   return nomeRegex.test(nome.value);
 };
-/* --------------------------------------------------------------------- */
 
-/* ---------- FUNÇÃO PARA VERIFICAR O EMAIL --------------------- */
+// Função para validar o e-mail (apenas domínios específicos permitidos)
 const checkEmail = (email) => {
   const partesEmail = email.split("@");
-
-  if (
-    (partesEmail.length === 2 &&
-      partesEmail[1].toLowerCase() === "gmail.com") ||
-    (partesEmail.length === 2 &&
-      partesEmail[1].toLowerCase() === "outlook.com") ||
-    (partesEmail.length === 2 && partesEmail[1].toLowerCase() === "hotmail.com")
-  ) {
-    return true;
-  } else {
-    return false;
-  }
+  return (
+    partesEmail.length === 2 &&
+    ["gmail.com", "outlook.com", "hotmail.com"].includes(
+      partesEmail[1].toLowerCase()
+    )
+  );
 };
-/* --------------------------------------------------------------------- */
 
-/* ---------- FUNÇÃO PARA VERIFICAR IGUALDADE DAS SENHAS --------------- */
+// Função para verificar se as senhas coincidem
 function checkPasswordMatch() {
-  return senha.value === confirmarSenha.value ? true : false;
+  return senha.value === confirmarSenha.value;
 }
-/* --------------------------------------------------------------------- */
 
-/* ----------- FUNÇÃO PARA INSERIR MASCARA NO TELEFONE ----------------- */
-
+// Função para formatar número de telefone com máscara
 function maskPhoneNumber(event) {
-  let celular = event.target.value;
-
-  if (/[A-Za-zÀ-ÿ]/.test(celular)) {
-    createDisplayMsgError("O celular deve conter apenas números!");
-  } else {
-    createDisplayMsgError("");
-  }
-
-  celular = celular.replace(/\D/g, ""); // Remove os caracteres não numéricos
+  let celular = event.target.value.replace(/\D/g, ""); // Remove caracteres não numéricos
 
   if (celular.length > 11) {
     celular = celular.substring(0, 11);
@@ -65,8 +49,6 @@ function maskPhoneNumber(event) {
 
   if (celular.length > 2) {
     celular = `(${celular.substring(0, 2)}) ${celular.substring(2)}`;
-  } else if (celular.length > 0) {
-    celular = `(${celular}`;
   }
 
   if (celular.length > 10) {
@@ -75,35 +57,25 @@ function maskPhoneNumber(event) {
 
   event.target.value = celular;
 }
-/* --------------------------------------------------------------------- */
 
-/* ------------- FUNÇÃO PARA VERIFICAR FORÇA DA SENHA ------------------ */
+// Função para verificar a força da senha
 function checkPasswordStrength(senha) {
-  if (!/[a-z]/.test(senha)) {
+  if (!/[a-z]/.test(senha))
     return "A senha deve ter pelo menos uma letra minúscula!";
-  }
-  if (!/[A-Z]/.test(senha)) {
+  if (!/[A-Z]/.test(senha))
     return "A senha deve ter pelo menos uma letra maiúscula!";
-  }
-  if (!/[\W_]/.test(senha)) {
+  if (!/\W/.test(senha))
     return "A senha deve ter pelo menos um caractere especial!";
-  }
-  if (!/\d/.test(senha)) {
-    return "A senha deve ter pelo menos um número!";
-  }
-  if (senha.length < 8) {
-    return "A senha deve ter pelo menos 8 caracteres!";
-  }
-
+  if (!/\d/.test(senha)) return "A senha deve ter pelo menos um número!";
+  if (senha.length < 8) return "A senha deve ter pelo menos 8 caracteres!";
   return null;
 }
-/* --------------------------------------------------------------------- */
 
-/* ------------- FUNÇÃO PARA VERIFICAR E ENVIAR DADOS ------------------ */
+// Função para validar e enviar os dados do formulário
 function fetchDatas(event) {
   event.preventDefault();
 
-  if (!checkNome) {
+  if (!checkNome()) {
     createDisplayMsgError(
       "O nome não pode conter números ou caracteres especiais!"
     );
@@ -111,9 +83,7 @@ function fetchDatas(event) {
   }
 
   if (!checkEmail(email.value)) {
-    createDisplayMsgError(
-      "O nome não pode conter números ou caracteres especiais!"
-    );
+    createDisplayMsgError("O e-mail digitado não é válido!");
     return;
   }
 
@@ -128,11 +98,6 @@ function fetchDatas(event) {
     return;
   }
 
-  if (celular.value && /[A-Za-zÀ-ÿ]/.test(celular.value)) {
-    createDisplayMsgError("O telefone deve conter apenas números");
-    return;
-  }
-
   const formData = {
     nome: nome.value,
     email: email.value,
@@ -144,25 +109,20 @@ function fetchDatas(event) {
 
   console.log("Formulário Enviado: ", JSON.stringify(formData, null, 2));
 }
-/* --------------------------------------------------------------------- */
 
-/* ------------ FUNÇÃO PARA CRIAR "CHUVA" NO FORMULÁRIO ---------------- */
-
+// Função para criar efeito de "chuva" na interface
 const rainFunction = () => {
   let rain = document.createElement("span");
-  // let cont_rain = document.getElementsByClassName("container_rain");
   let cont_rain = document.querySelector(".container_rain");
   let left = Math.floor(Math.random() * (310 - 65) + 65);
   let duration = Math.random() * 5;
 
   rain.classList.add("rain");
-  // cont_rain[0].appendChild(rain);
   cont_rain.appendChild(rain);
   rain.style.left = left + "px";
   rain.style.animationDuration = 1 + duration;
 
   setTimeout(() => {
-    // cont_rain[0].removeChild(rain);
     cont_rain.removeChild(rain);
   }, 1500);
 };
@@ -171,97 +131,42 @@ setInterval(() => {
   rainFunction();
 }, 250);
 
-/* --------------------------------------------------------------------- */
-
+// Eventos para validar entradas em tempo real
 nome.addEventListener("input", () => {
-  if (nome.value && !checkNome()) {
-    createDisplayMsgError(
-      "O nome não pode conter números ou caracteres especiais!"
-    );
-  } else {
-    createDisplayMsgError("");
-  }
+  createDisplayMsgError(
+    checkNome() ? "" : "O nome não pode conter números ou caracteres especiais!"
+  );
 });
 
 email.addEventListener("input", () => {
-  if (email.value && !checkEmail(email.value)) {
-    createDisplayMsgError("O e-mail digitado não é valido!");
-  } else {
-    createDisplayMsgError("");
-  }
+  createDisplayMsgError(
+    checkEmail(email.value) ? "" : "O e-mail digitado não é válido!"
+  );
 });
 
 senha.addEventListener("input", () => {
-  if (senha.value && checkPasswordStrength(senha.value)) {
-    createDisplayMsgError(checkPasswordStrength(senha.value));
-  } else {
-    createDisplayMsgError("");
-  }
+  createDisplayMsgError(checkPasswordStrength(senha.value) || "");
 });
 
 formulario.addEventListener("submit", fetchDatas);
 
-/* --------------------------------------------------------------------- */
-
-/* ------------- FUNÇÃO PARA INSERIR MÁSCARA NO CPF ------------------ */
-
+// Máscara para CPF
 function maskCPF(event) {
-  let cpf = event.target.value;
-
-  if (/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/.test(cpf)) {
-    createDisplayMsgError("O cpf deve conter apenas números!");
-  } else {
-    createDisplayMsgError("");
-  }
-
-  cpf = cpf.replace(/\D/g, ""); // Remove os caracteres não numéricos
-
-  if (cpf.length > 11) {
-    cpf = cpf.substring(0, 11);
-  }
-
-  cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-
-  if (cpf.length > 10) {
-    cpf = cpf.replace(/[0-9]{3}\.[\d*]{3}\.[\d*]{3}[-]?[0-9]{2}/);
-
-    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
-    cpf = cpf.replace(/(\d{3})(\d)/, "$1-$2");
-  }
-
+  let cpf = event.target.value.replace(/\D/g, "");
+  if (cpf.length > 11) cpf = cpf.substring(0, 11);
+  cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
   event.target.value = cpf;
 }
-/* --------------------------------------------------------------------- */
 
-/* ------------- FUNÇÃO PARA INSERIR MÁSCARA NO RG ------------------ */
-
+// Máscara para RG
 function maskRG(event) {
-  let rg = event.target.value;
-
-  if (/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/.test(rg)) {
-    createDisplayMsgError("O rg deve conter apenas números!");
-  } else {
-    createDisplayMsgError("");
-  }
-
-  rg = rg.replace(/\D/g, ""); // Remove os caracteres não numéricos
-
-  if (rg.length > 9) {
-    rg = rg.substring(0, 9);
-  }
-
-  rg = rg.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-
-  if (rg.length > 8) {
-    rg = rg.replace(/^(\d{1,2})(\d{3})(\d{3})([\dX])$/, "$1.$2.$3-$4");
-
-    // RG = RG.replace(/(\d{3})(\d)/, "$1.$2");
-    // RG = RG.replace(/(\d{3})(\d)/, "$1-$2");
-  }
-
+  let rg = event.target.value.replace(/\D/g, "");
+  if (rg.length > 9) rg = rg.substring(0, 9);
+  rg = rg.replace(/(\d{2})(\d{3})(\d{3})([\dX])/, "$1.$2.$3-$4");
   event.target.value = rg;
 }
-/* --------------------------------------------------------------------- */
+
+// Adiciona eventos de input para mascarar os campos correspondentes
 celular.addEventListener("input", maskPhoneNumber);
 cpf.addEventListener("input", maskCPF);
 rg.addEventListener("input", maskRG);

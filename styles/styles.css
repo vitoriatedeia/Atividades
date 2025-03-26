@@ -1,28 +1,33 @@
+/* Importa a fonte "Copperplate" do arquivo local */
 @font-face {
   font-family: "Copperplate";
   src: url("../fonts/Copperplate.otf");
 }
 
+/* Importa a fonte "JoseFins" do arquivo local */
 @font-face {
   font-family: "JoseFins";
   src: url("../fonts/JosefinSans.ttf");
 }
 
+/* Reset de estilos para remover margens e paddings padrão */
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
+/* Define o estilo do corpo da página */
 body {
   height: 100vh;
-  background-color: #000000;
+  background-color: #000000; /* Fundo preto */
 
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Container para efeito de chuva */
 .container_rain {
   position: absolute;
   top: 0;
@@ -32,6 +37,7 @@ body {
   background-color: transparent;
 }
 
+/* Estiliza as nuvens */
 .cloud {
   position: absolute;
   width: 250px;
@@ -40,6 +46,7 @@ body {
   filter: drop-shadow(2px 2px 20px #e3eed4);
 }
 
+/* Define posições específicas para as nuvens */
 .cloud:nth-child(1) {
   top: 2.5%;
   left: 5%;
@@ -57,6 +64,7 @@ body {
   left: 5%;
 }
 
+/* Estiliza as gotas de chuva */
 .rain {
   background-color: #e3eed4;
   width: 5px;
@@ -72,32 +80,31 @@ body {
   animation: animate 2s linear infinite;
 }
 
+/* Animação da chuva */
 @keyframes animate {
   0% {
     transform: translateY(0) scaleY(1);
     opacity: 1;
   }
-
   60% {
     transform: translateY(80vh) scaleY(1);
     opacity: 1;
   }
-
   80% {
     transform: translateY(80vh) scaleY(0.2);
     opacity: 0.5;
   }
-
   100% {
     transform: translateY(80vh) scaleY(0.2);
     opacity: 0;
   }
 }
 
+/* Container principal do formulário */
 .container {
   width: 80%;
   height: 80%;
-  background-color: #e3eed4;
+  background-color: #e3eed4; /* Fundo claro */
   border-radius: 30px;
   box-shadow: 2px -10px 35px #ffffff;
 
@@ -110,10 +117,11 @@ body {
   overflow: hidden;
 }
 
+/* Estiliza a imagem de fundo */
 .image_container {
   width: 100%;
   height: 100%;
-  background: url("../images/semifinal-do-paulistao.jpg ") center / cover
+  background: url("../images/semifinal-do-paulistao.jpg") center / cover
     no-repeat;
   border-radius: 0 30px 30px 0;
 
@@ -126,6 +134,7 @@ body {
   justify-content: center;
 }
 
+/* Adiciona um efeito escuro sobre a imagem */
 .image_container::before {
   content: "";
   position: absolute;
@@ -137,6 +146,7 @@ body {
   z-index: 1;
 }
 
+/* Define estilos para o texto dentro da imagem */
 .image_container h1,
 .image_container p {
   position: relative;
@@ -144,33 +154,7 @@ body {
   color: #e3eed4;
 }
 
-.image_container h1 {
-  font-family: "JoseFins";
-  font-size: 45px;
-}
-
-.image_container p {
-  font-family: "Copperplate";
-  font-size: 13px;
-}
-
-#cadastroForm {
-  width: 80%;
-  height: 90%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 30px;
-}
-
-#cadastroForm h1,
-#cadastroForm p {
-  width: 100%;
-  text-align: center;
-}
-
+/* Estiliza os títulos do formulário */
 #cadastroForm h1 {
   font-family: "JoseFins";
   font-size: 2em;
@@ -184,75 +168,30 @@ body {
   color: #0f2a1d;
 }
 
-#cadastroForm .input_data {
-  position: relative;
-  width: calc(50% - 15px);
-  display: flex;
-  flex-direction: column;
-  color: #0f2a1d;
-}
-
-#cadastroForm .input_data:nth-child(8) {
-  width: 100%;
-}
-
+/* Define o estilo dos inputs */
 #cadastroForm .input_data input {
-  position: relative;
-  z-index: 2;
   font-family: "Copperplate";
   font-size: 11px;
-  margin-top: 5px;
-  height: 30px;
-
-  padding: 5px 10px;
-
   border: none;
-  outline: 0;
-  background-color: transparent;
-  border-radius: 0;
   border-bottom: 1px solid #0f2a1d;
   color: #0f2a1d;
 }
 
-#cadastroForm .input_data label {
-  font-family: "Copperplate";
-  font-size: 11px;
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  transition: all 0.5s ease;
-  z-index: 1;
-  color: #0f2a1d;
-}
-
+/* Animação dos labels ao preencher os inputs */
 #cadastroForm .input_data input:focus + label,
 #cadastroForm .input_data input:valid + label {
   top: -10%;
   left: 0;
 }
 
-#cadastroForm .btnArea {
-  width: 100%;
-}
-
-#cadastroForm .btnArea .msgError {
-  margin-bottom: 10px;
-  height: 25px;
-  color: #ff0000;
-  font-style: italic;
-}
-
+/* Botão de envio */
 #cadastroForm .btnArea button {
   font-family: "Copperplate";
   border: 1px solid #0f2a1d;
-  width: 100%;
-  padding: 10px 20px;
   background-color: #0f2a1d;
   color: #e3eed4;
   cursor: pointer;
   font-size: 18px;
-  letter-spacing: 1.5px;
 }
 
 #cadastroForm .btnArea button:hover {
@@ -262,40 +201,15 @@ body {
   transition: 0.7s;
 }
 
+/* Responsividade para telas menores */
 @media (max-width: 830px) {
-  /* body {
-    background-color: red;
-  } */
-
   .container {
     grid-template-columns: 1fr;
     grid-template-rows: 30% 70%;
     height: 90%;
   }
 
-  #cadastroForm {
-    height: 100%;
-    padding: 10px 0px;
-    font-size: 20px;
-  }
-
   .container_rain {
-    display: none;
-  }
-
-  #cadastroForm p {
-    font-size: 10px;
-  }
-
-  #cadastroForm h1 {
-    font-size: 25px;
-  }
-
-  .image_container h1 {
-    font-size: 30px;
-  }
-
-  .image_container p {
-    font-size: 10px;
+    display: none; /* Remove o efeito de chuva em telas pequenas */
   }
 }
